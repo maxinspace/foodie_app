@@ -1,0 +1,8 @@
+export RAILS_ENV=development
+export DATABASE_USER=postgres
+export DATABASE_PASSWORD=postgres
+export POSTGRES_PASSWORD=postgres
+export DATABASE_HOST=db
+export DATABASE_PORT=5432
+export REDIS_HOST=redis
+export REDIS_PORT=6379

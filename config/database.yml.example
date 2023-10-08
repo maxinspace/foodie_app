@@ -1,0 +1,40 @@
+default: &default
+  adapter: postgresql
+  host: localhost
+  username: foodie
+  password: ''
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  checkout_timeout: 60
+  prepared_statements: false
+  reaping_frequency: 15
+  port: 5432
+  encoding: unicode
+
+development:
+  <<: *default
+  database: foodie_development
+  # Minimum log levels, in increasing order:
+  #   debug5, debug4, debug3, debug2, debug1,
+  #   log, notice, warning, error, fatal, and panic
+  # Defaults to warning.
+  min_messages: warning
+
+test:
+  <<: *default
+  database: <%= ENV["APP_NAME"].underscore.downcase %>_test
+
+staging:
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
+  database: <%= ENV["APP_NAME"].underscore.downcase %>_staging
+  username: <%= ENV["DATABASE_USER"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
+
+production:
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
+  database: <%= ENV["APP_NAME"].underscore.downcase %>_production
+  username: <%= ENV["DATABASE_USER"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
